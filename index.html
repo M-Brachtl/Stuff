@@ -10,8 +10,7 @@
 
 <body class="js-focus-visible">
     <input onchange='convertToCyrillic();' type="text">
-    <button onclick='convertToCyrillic();'>Transcript</button>
-    <p></p>
+    <button onclick='document.querySelector('input').value = '';>Clear</button>
 <script>
     const combos = {
         "a": "а",
@@ -73,8 +72,9 @@
                 russianArray[russianArray.length-1] = char;
             }
         }
-
-        document.querySelector('p').innerHTML = russianArray.join('');
+        const new_p = document.createElement('p');
+        document.body.appendChile(new_p)
+        new_p.innerHTML = russianArray.join('');
         const textArea = document.createElement("textarea");
         textArea.value = russianArray.join('');
         document.body.appendChild(textArea);
