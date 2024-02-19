@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latinka -> Azbuka</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</title>
+
+<body class="js-focus-visible">
+    <input onchange='convertToCyrillic();' type="text">
+    <button onclick='convertToCyrillic();'>Transcript</button>
+    <p></p>
+<script>
+    const combos = {
+        "a": "а",
+        "b": "б",
+        "c": "ц",
+        "d": "д",
+        "e": "е",
+        "f": "ф",
+        "g": "г",
+        "h": "г",
+        "i": "и",
+        "j": "й",
+        "k": "к",
+        "l": "л",
+        "m": "м",
+        "n": "н",
+        "o": "о",
+        "p": "п",
+        "t": "т",
+        "r": "р",
+        "s": "с",
+        "u": "у",
+        "v": "в",
+        "´": "ъ",  // Hard sign
+        "y": "ы",
+        "z": "з",
+        "ž": "ж",
+        "š": "ш",
+        "č": "ч",
+        "ś": "щ",
+        "ě": "э",
+        "ˇ": "ь",  // Soft sign
+        "ú": "ю",
+        "á": "я",
+        "ó": "ё",
+        "x": "х",
+        "ů": "ў",  // Ukrainian and Belarusian Cyrillic
+        "ý": "і",
+        "q": "ґ",
+        "é": "є",
+        "í": "ї"
+    };
+
+    function convertToCyrillic() {
+        const latinArray = document.querySelector('input').value.split('');
+        const russianArray = [];
+
+        for (const char of latinArray) {
+            try {
+                if (char.toLowerCase() !== char) {
+                    russianArray.push(combos[char.toLowerCase()].toUpperCase());
+                } else {
+                    russianArray.push(combos[char]);
+                }
+            } catch (error) {
+                russianArray.push(char);
+            }
+            if(russianArray[russianArray.length-1] === undefined){
+                russianArray[russianArray.length-1] = char;
+            }
+        }
+
+        document.querySelector('p').innerHTML = russianArray.join('');
+        const textArea = document.createElement("textarea");
+        textArea.value = russianArray.join('');
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+</script>
+</body>
